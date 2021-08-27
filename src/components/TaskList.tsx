@@ -14,8 +14,6 @@ export function TaskList() {
 	const [newTaskTitle, setNewTaskTitle] = useState('');
 
 	function handleCreateNewTask() {
-		// Crie uma nova task com um id random, não permita criar caso o título seja vazio.
-
 		if (!newTaskTitle) return;
 
 		setTasks([
@@ -31,8 +29,6 @@ export function TaskList() {
 	}
 
 	function handleToggleTaskCompletion(id: number) {
-		// Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-
 		setTasks(
 			tasks.map(task =>
 				task.id === id
@@ -46,8 +42,6 @@ export function TaskList() {
 	}
 
 	function handleRemoveTask(id: number) {
-		// Remova uma task da listagem pelo ID
-
 		setTasks(tasks.filter(task => task.id !== id));
 	}
 
@@ -59,10 +53,11 @@ export function TaskList() {
 				<div className='input-group'>
 					<input
 						type='text'
+						value={newTaskTitle}
 						placeholder='Adicionar novo todo'
 						onChange={e => setNewTaskTitle(e.target.value)}
-						value={newTaskTitle}
 					/>
+
 					<button type='submit' data-testid='add-task-button' onClick={handleCreateNewTask}>
 						<FiCheckSquare size={16} color='#fff' />
 					</button>
@@ -76,13 +71,15 @@ export function TaskList() {
 							<div className={task.isComplete ? 'completed' : ''} data-testid='task'>
 								<label className='checkbox-container'>
 									<input
-										type='checkbox'
 										readOnly
+										type='checkbox'
 										checked={task.isComplete}
 										onClick={() => handleToggleTaskCompletion(task.id)}
 									/>
+
 									<span className='checkmark'></span>
 								</label>
+
 								<p>{task.title}</p>
 							</div>
 
